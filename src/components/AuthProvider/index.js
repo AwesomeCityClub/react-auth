@@ -8,6 +8,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../../firebase";
+import Login from "../../modal/Login";
+import Signup from "../../modal/Signup";
 
 const AuthProvider = () => {
   const [isAuth, setIsAuth] = useState("false");
@@ -26,7 +28,7 @@ const AuthProvider = () => {
 
   async function handleSignUp(account, password) {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, account, password);
     } catch (error) {
       alert(error.message);
     }
@@ -50,7 +52,12 @@ const AuthProvider = () => {
 
   const value = { isAuth, handleLogin, handleLogout, handleSignUp };
 
-  return <Provider value={value}>{children}</Provider>;
+  return (
+    <Provider value={value}>
+      <Login />
+      <Signup />
+    </Provider>
+  );
 };
 
 export default AuthProvider;
