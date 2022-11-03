@@ -1,19 +1,17 @@
-import { BrowserRouter , Routes, Route } from "react-router-dom"
-import Product from './page/Product/Product'
-import Error from './page/Error/Error'
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Product from "./page/Product/Product";
+import Error from "./page/Error/Error";
+import AuthProvider from "./components/AuthProvider";
 
 function App() {
   return (
-   <BrowserRouter> 
-   <Routes>
-    <Route path="/" element ={<Product />} >
-   
-    </Route>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Product />}></Route>
 
-    <Route path="*" element ={<Error />} />
-   </Routes>
-   </BrowserRouter>
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

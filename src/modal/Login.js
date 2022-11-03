@@ -8,7 +8,7 @@ const Login = () => {
 
   return (
     <>
-      {isAuth && (
+      {!isAuth && (
         <div className="relative ">
           <div className="h-full fixed inset-0 bg-neutral-900/50">
             <div class="mx-auto my-36 flex h-[300px] w-[350px] flex-col border-2 bg-white text-black shadow-xl  ">
