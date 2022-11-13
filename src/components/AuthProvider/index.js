@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Provider } from "../../context/authContext";
+import React, { useState, useEffect } from 'react';
+import { Provider } from '../../context/authContext';
 
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from "firebase/auth";
-import { auth } from "../../firebase";
-import Login from "../../modal/Login";
-import Signup from "../../modal/Signup";
+} from 'firebase/auth';
+import { auth } from '../../firebase';
+import Login from '../../modal/Login';
+import Signup from '../../modal/Signup';
 
 const AuthProvider = () => {
-  const [isAuth, setIsAuth] = useState("false");
+  const [isAuth, setIsAuth] = useState('false');
 
   useEffect(() => {
     const removeListener = onAuthStateChanged(auth, (user) => {
@@ -26,8 +26,12 @@ const AuthProvider = () => {
     return removeListener;
   }, []);
 
-  async function handleSignUp(account, password) {
+  async function handleSignUp(account, password, confirmPassword) {
     try {
+      if (confirmPassword !== password) {
+        return alert('請再次確認您的密碼');
+      }
+
       await createUserWithEmailAndPassword(auth, account, password);
     } catch (error) {
       alert(error.message);
@@ -55,7 +59,6 @@ const AuthProvider = () => {
   return (
     <Provider value={value}>
       <Login />
-      <Signup />
     </Provider>
   );
 };
